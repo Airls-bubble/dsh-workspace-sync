@@ -32,7 +32,7 @@ dsh plugin --profile web remove dsh-workspace-sync
 | 工具 | 作用 |
 |---|---|
 | `sync_workspace` | 执行同步。`peerId` 多对端时指定对端；`seed:'push'\|'pull'` 显式播种；发现冲突时只报计划，`confirm_conflicts:true` 才落盘；`background:true` 后台执行（首次 4.6GB 全量播种必开，否则工具调用会挂到传完为止） |
-| `sync_status` | 本机身份、服务端口、已配对设备、上次同步报告（后台同步时 `syncing:false` 即结束） |
+| `sync_status` | 本机身份、服务端口、当前工作区、已配对设备、上次同步报告（后台同步时 `syncing:false` 即结束） |
 | `sync_pair` | `export` 出配对码 / `import` 导入 / `list` / `forget` / `discover` 浏览局域网在线设备 |
 
 ## 配置（可选）
@@ -98,3 +98,5 @@ node --test test/engine.test.js test/sync.test.js
 ## License
 
 MIT
+
+面板内可直接完成全部操作：**工作区选择**（服务端目录浏览器，Win 列盘符、Mac 从根目录浏览，历史目录一键切回；两台机器各选各的根，基线随目录存在各自 `.sync/` 下互不干扰）、生成/导入配对码、发现设备、开始同步（可选后台执行）、冲突确认与运行报告。
