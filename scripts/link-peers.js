@@ -10,12 +10,19 @@
  * @deepseek-ai package bundled with the global dsh installation.
  * NEVER overwrites existing entries.
  *
- * Run:  node scripts/link-peers.js
+ * Run:  node scripts/link-peers.js          → repair the GLOBAL peer dir
+ *       node scripts/link-peers.js --repo   → repair this repo's node_modules
+ *                                             (wired as postinstall, because
+ *                                             npm install prunes foreign
+ *                                             symlinks from node_modules)
  */
 import { existsSync, mkdirSync, readdirSync, symlinkSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+
+const repoMode = process.argv.includes("--repo");
 
 function globalNodeRoot() {
   for (const cmd of ["npm", "pnpm"]) {
@@ -29,7 +36,9 @@ function globalNodeRoot() {
 
 const srcDir = join(globalNodeRoot(), "@deepseek-ai", "dsh", "node_modules", "@deepseek-ai");
 if (!existsSync(srcDir)) throw new Error("dsh 安装里没有 " + srcDir + " — dsh 版本过旧或路径变更？");
-const destBase = join(homedir(), ".dsh", "profiles", "node_modules", "@deepseek-ai");
+const destBase = repoMode
+  ? join(fileURLToPath(new URL("../node_modules/", import.meta.url)), "@deepseek-ai")
+  : join(homedir(), ".dsh", "profiles", "node_modules", "@deepseek-ai");
 mkdirSync(destBase, { recursive: true });
 
 let created = 0;
