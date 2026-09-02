@@ -10,10 +10,10 @@ import { join } from "node:path";
 
 test("setWorkspaceRoot validates, switches, and remembers history", async () => {
   const base = await fsp.mkdtemp(join(os.tmpdir(), "wss-ws-"));
-  const rootA = join(base, "alpha");
-  const rootB = join(base, "beta");
-  await fsp.mkdir(join(rootA, "sub"), { recursive: true });
-  await fsp.mkdir(rootB, { recursive: true });
+  await fsp.mkdir(join(base, "alpha", "sub"), { recursive: true });
+  await fsp.mkdir(join(base, "beta"), { recursive: true });
+  const rootA = await fsp.realpath(join(base, "alpha")); // realpath: macOS /var → /private/var
+  const rootB = await fsp.realpath(join(base, "beta"));
 
   const { createSyncService } = await import("../lib/sync-service.js");
   const log = () => {};
