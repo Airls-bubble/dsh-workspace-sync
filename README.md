@@ -31,8 +31,8 @@ dsh plugin --profile web remove dsh-workspace-sync
 
 | 工具 | 作用 |
 |---|---|
-| `sync_workspace` | 执行同步。`peerId` 多对端时指定对端；`seed:'push'\|'pull'` 显式播种；发现冲突时只报计划，`confirm_conflicts:true` 才落盘 |
-| `sync_status` | 本机身份、服务端口、已配对设备、上次同步报告 |
+| `sync_workspace` | 执行同步。`peerId` 多对端时指定对端；`seed:'push'\|'pull'` 显式播种；发现冲突时只报计划，`confirm_conflicts:true` 才落盘；`background:true` 后台执行（首次 4.6GB 全量播种必开，否则工具调用会挂到传完为止） |
+| `sync_status` | 本机身份、服务端口、已配对设备、上次同步报告（后台同步时 `syncing:false` 即结束） |
 | `sync_pair` | `export` 出配对码 / `import` 导入 / `list` / `forget` / `discover` 浏览局域网在线设备 |
 
 ## 配置（可选）
