@@ -100,7 +100,7 @@ npm install   # bonjour-service 是唯一运行时依赖；@deepseek-ai/* peer �
 npm test      # pretest 会先自动重建仓库内 peer 链接，再跑全部测试
 ```
 
-`test/sync.test.js` 是真实回环：两个服务、两个临时工作区、真 HTTP，覆盖播种、合并、删除、冲突、门禁、路径收容的完整生命周期。`test/render.test.js` 与 `test/data-shapes.test.js` 用真实 react-dom/server 渲染面板，后者喂入完整 RPC 数据形态——面板的几场线上事故都栽在「空数据能过、真数据必炸」上，这套测试就是为此生的。
+`test/sync.test.js` 是真实回环：两个服务、两个临时工作区、真 HTTP，覆盖播种、合并、删除、冲突、门禁、路径收容的完整生命周期。`test/render.test.js` 与 `test/data-shapes.test.js` 用真实 react-dom/server 渲染面板，后者喂入完整 RPC 数据形态。面板的几场线上事故都栽在「空数据能过、真数据必炸」上，这套测试就是为此生的。
 
 ## License
 
