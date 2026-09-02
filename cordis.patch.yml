@@ -1,0 +1,6 @@
+# dsh-workspace-sync bundle patch: one host plugin entry in the web profile
+# composition. Host-only bundle (no settings card, no client half yet — the
+# web panel lands in M4 and will extend package.json with dsh.client).
+- insert:
+    - id: dsh-workspace-sync
+      name: dsh-workspace-sync
