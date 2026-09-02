@@ -6,7 +6,9 @@
   "type": "module",
   "main": "./lib/index.js",
   "exports": {
-    ".": { "import": "./lib/index.js" },
+    ".": {
+      "import": "./lib/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -16,7 +18,9 @@
     "LICENSE"
   ],
   "sideEffects": false,
-  "engines": { "node": ">=22.19" },
+  "engines": {
+    "node": ">=22.19"
+  },
   "dependencies": {
     "bonjour-service": "^1.2.1"
   },
@@ -25,8 +29,12 @@
     "@deepseek-ai/dsh-tools": "*"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/cordis": { "optional": true },
-    "@deepseek-ai/dsh-tools": { "optional": true }
+    "@deepseek-ai/cordis": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
   },
   "dsh": {
     "bundle": {
@@ -48,5 +56,9 @@
       "@deepseek-ai/dsh-client-ui-slots"
     ],
     "platform": "web"
+  },
+  "devDependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }

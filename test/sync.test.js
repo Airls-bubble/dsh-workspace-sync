@@ -178,3 +178,37 @@ async function readdirRecursive(dir) {
   await walk(dir);
   return out;
 }
+
+test("background mode: returns 'started' immediately, completes on its own", async (t) => {
+  const A = await makeSide(t);
+  const B = await makeSide(t);
+  const impA = A.svc.pairImport(B.svc.pairExport().code);
+  const impB = B.svc.pairImport(A.svc.pairExport().code);
+  wirePeer(A.svc, B.svc, impA.peer.id);
+  wirePeer(B.svc, A.svc, impB.peer.id);
+
+  await writeFile(join(A.root, "bg.txt"), "后台播种\n");
+  const t0 = Date.now();
+  const r = await A.svc.runSync({ background: true });
+  const returnedIn = Date.now() - t0;
+  assert.equal(r.status, "started", JSON.stringify(r));
+  assert.ok(returnedIn < 3000, "后台模式必须立刻返回，实际 " + returnedIn + "ms");
+
+  // poll until the background run drains
+  for (let i = 0; i < 200; i++) {
+    const s = A.svc.status();
+    if (!s.syncing && s.lastReport) break;
+    await new Promise((res) => setTimeout(res, 50));
+  }
+  const s = A.svc.status();
+  assert.equal(s.syncing, false);
+  assert.ok(s.lastReport, "后台完成后应有 lastReport");
+  assert.equal(await readFile(join(B.root, "bg.txt"), "utf8"), "后台播种\n");
+
+  // busy-guard: a second sync while one runs is refused (foreground path)
+  await writeFile(join(A.root, "bg2.txt"), "x\n");
+  const p1 = A.svc.runSync({});
+  const busy = await A.svc.runSync({});
+  assert.equal(busy.status, "busy");
+  await p1;
+});

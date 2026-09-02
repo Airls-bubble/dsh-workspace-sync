@@ -76,6 +76,16 @@ dsh-workspace-sync:
 
 重启 `dsh web` 后，侧边栏底部多一个「工作区同步」入口：本机状态、已配对对端、配对码生成/导入、局域网设备发现、一键同步（含冲突计划确认）都在面板里。数据经 `/workspace-sync/api`（宿主半身 RPC，与 dsh-market 的 `/market/api` 同机制）。
 
+## Windows 侧排障
+
+插件依赖 DSH 的 peer 链接目录（`~/.dsh/profiles/node_modules/@deepseek-ai/`，指向 dsh 本体自带包）来解析 `@deepseek-ai/dsh-tools`。若插件启动后休眠、`~/.dsh/storages/workspace-sync.boot.log` 里出现「dsh-tools 不可解析」，跑一次：
+
+```sh
+node <插件目录>\scripts\link-peers.js
+```
+
+它会为缺失的 @deepseek-ai 包补建 junction（无需管理员权限），完成后重启 dsh。
+
 ## 开发
 
 ```sh
