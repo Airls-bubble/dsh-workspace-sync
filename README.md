@@ -9,7 +9,7 @@ DeepSeek Harness 插件：在两台已配对的机器（macOS ↔ Windows）之�
 ## 安装（每台机器各自执行一次）
 
 ```sh
-dsh plugin --profile web add git+https://github.com/nexsjournal/dsh-workspace-sync.git
+dsh plugin --profile web add git+https://github.com/Airls-bubble/dsh-workspace-sync.git
 ```
 
 DSH 按实际安装状态自动对账 `dsh.profile.bundles`，装完重启 `dsh web` 即生效。卸载：
