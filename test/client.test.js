@@ -20,11 +20,17 @@ globalThis.document = {
   head: { appendChild: () => {} },
 };
 let hookCalls = 0;
+class StubComponent {
+  constructor(props) { this.props = props; this.state = {}; }
+  setState(p) { this.state = typeof p === "function" ? p(this.state) : p; }
+  render() { return null; }
+}
 globalThis.__react = {
   createElement: (type, props, ...children) => ({ type, props, children }),
   useState: (init) => [init, () => {}],
   useEffect: () => {},
   useSyncExternalStore: () => false,
+  Component: StubComponent,
 };
 // lib/client.js does `require("react")` through the loader's shim — we
 // execute the factory ourselves with that shim below.
