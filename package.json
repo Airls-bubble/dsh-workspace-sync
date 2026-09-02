@@ -9,7 +9,10 @@
     ".": {
       "import": "./lib/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./client": {
+      "default": "./lib/client.js"
+    }
   },
   "files": [
     "lib",
