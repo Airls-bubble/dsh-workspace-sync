@@ -1,6 +1,6 @@
 {
   "name": "dsh-workspace-sync",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "DeepSeek Harness plugin: P2P workspace sync between two machines (macOS/Windows) over LAN — three-way manifest merge, conflict keep-both, token-gated plaintext HTTP transfer, mDNS discovery, chat tools + web panel.",
   "license": "MIT",
   "type": "module",
