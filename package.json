@@ -22,7 +22,7 @@
     "node": ">=22.19"
   },
   "scripts": {
-    "postinstall": "node scripts/link-peers.js --repo",
+    "pretest": "node scripts/link-peers.js --repo",
     "test": "node --test test/engine.test.js test/sync.test.js test/client.test.js test/render.test.js"
   },
   "dependencies": {
