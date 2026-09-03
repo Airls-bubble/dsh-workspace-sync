@@ -86,4 +86,5 @@ test("claim route: brute-force lockout after 5 wrong codes", async (t) => {
   }
   // 第 6 次即使拿对短码也被锁拒（同 IP）
   await assert.rejects(() => A.svc.claimFromPeer(url, A.svc.status().pairOffer.code), /频繁|无效|拒绝/);
+  A.svc.cancelPairOffer();
 });
