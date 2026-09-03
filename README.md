@@ -2,7 +2,6 @@
 
 一个 DeepSeek Harness 插件。它把一台电脑上的 DSH 工作区，通过局域网直接同步到另一台电脑。
 
-版本 0.5.0。源码在 <https://github.com/Airls-bubble/dsh-workspace-sync>。
 
 ## 这是什么
 
