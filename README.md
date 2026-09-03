@@ -34,7 +34,7 @@ dsh plugin --profile web add git+https://github.com/Airls-bubble/dsh-workspace-s
 dsh plugin --profile web remove dsh-workspace-sync
 ```
 
-## 第一次用（三步）
+## 第一次用
 
 **第一步：配对。** 两台机器得先认识彼此。
 
@@ -68,7 +68,7 @@ dsh plugin --profile web remove dsh-workspace-sync
 
 发现冲突时，插件只给一份计划清单，不动文件。你看完清单，确认 `confirm_conflicts:true`，才真正落盘。
 
-## 同步规则（人话版）
+## 同步规则
 
 插件拿三条清单做比对：基线、本机、对端。
 
