@@ -38,7 +38,7 @@ const RICH_STATUS = {
 test("panel renders every populated data shape without throwing", () => {
   const def = loaded[0];
   const exported = def.factory(() => react);
-  const { Panel, Shield } = exported.__test;
+  const { SettingsSection, Shield } = exported.__test;
 
   const shapes = {
     "rich status": { __initialStatus: RICH_STATUS },
@@ -52,7 +52,7 @@ test("panel renders every populated data shape without throwing", () => {
   };
 
   for (const [name, props] of Object.entries(shapes)) {
-    const html = renderToString(react.createElement(Shield, null, react.createElement(Panel, { onClose: () => {}, ...props })));
+    const html = renderToString(react.createElement(Shield, null, react.createElement(SettingsSection, props)));
     assert.match(html, /工作区同步/, name + " 应渲染出面板标题");
     assert.doesNotMatch(html, /面板渲染出错/, name + " 不应触发错误盾牌");
   }

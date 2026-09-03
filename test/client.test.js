@@ -1,8 +1,8 @@
 /**
- * client.test.js — wiring test for the web panel half, in Node with stubbed
- * window/document/react. Verifies: ModuleLoader registration id, slot
- * registration (sidebar + overlay), and that the components render element
- * trees without throwing.
+ * client.test.js — wiring test for the web half, in Node with stubbed
+ * window/document/react. Verifies: ModuleLoader registration id, the single
+ * settings.section slot registration, and that the component renders an
+ * element tree without throwing.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -68,14 +68,14 @@ test("client half registers module, slots and renders components", async () => {
     },
   };
   exported.apply(ctx);
-  assert.deepEqual(injected.sort(), ["shell.overlay", "sidebar.footer.action"]);
-  assert.equal(registrations.length, 2);
-  assert.ok(registrations.some((r) => r.meta.name === "sidebar.footer.action" && r.meta.id === "dsh-workspace-sync"));
-  assert.ok(registrations.some((r) => r.meta.name === "shell.overlay"));
+  assert.deepEqual(injected, ["settings.section"]);
+  assert.equal(registrations.length, 1);
+  assert.equal(registrations[0].meta.name, "settings.section");
+  assert.equal(registrations[0].meta.id, "workspace-sync");
 
   // render both components: element trees, no throw
   for (const r of registrations) {
-    const el = r.render({ wide: true });
+    const el = r.render({});
     assert.ok(el && typeof el === "object" && "type" in el, r.meta.name + " 应渲染出元素树");
   }
 });
